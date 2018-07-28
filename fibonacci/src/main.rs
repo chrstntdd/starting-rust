@@ -3,17 +3,17 @@ use std::io;
 fn main() {
     println!("How many fibonacci numbers would u like?");
 
-    fn fibonacci(n: i64) -> i64 {
-        if n < 0 {
-            println!("No can do, nothing less than zero can be used. ");
-            0
-        } else if n == 1 {
-            0
-        } else if n == 2 {
-            1
-        } else {
-            fibonacci(n - 1) + fibonacci(n - 2)
+    fn fibonacci(n: u64) -> u64 {
+        let mut a = 0;
+        let mut b = 1;
+        for _ in 0..n {
+            let tmp = a;
+            a = b;
+            b = a + tmp;
+            println!("current number in the sequence: {}", b);
         }
+
+        b
     }
 
     let mut user_input = String::new();
@@ -22,7 +22,7 @@ fn main() {
         .read_line(&mut user_input)
         .expect("Failed to read line");
 
-    let result: i64 = match user_input.trim().parse() {
+    let result: u64 = match user_input.trim().parse() {
         Ok(num) => fibonacci(num),
         Err(_) => 1,
     };
